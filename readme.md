@@ -8,14 +8,20 @@
 5. [ ] save the hash of the article into a database or just a file
 6. [ ] send them to telegram
 
+### Categories 
+
+* Worldwide 
+* War 
+
 ### Sources
 
 * RSS Sources and feeds : 
- 1. BBC  
- 2. CNN  
- 3. Reuters 
+ 1. BBC - https://feeds.bbci.co.uk/news/world/rss.xml
+ 2. CNN - http://rss.cnn.com/rss/edition_world.rss
+ 3. Al Jazeera - https://www.aljazeera.com/xml/rss/all.xml
+ 4. Reuters - https://reutersbest.com/feed
  
 * Telegram Channels :
  1. https://t.me/AjaNews - Arabic
  2. https://t.me/ClashReport - English
- 
+ 3. https://t.me/QudsNen - English
