@@ -2,8 +2,8 @@
 
 ### Pipeline 
 1. [ ] Get the news using RSS / feedparser / other sources
-2. [ ] translate them into persian
-3. [ ] check if the hash of the article exists in the database/file  
+2. [ ] check if the hash of the article exists in the database/file  
+3. [ ] translate them into persian
 4. [ ] filter the news with the keywords using regex/nltk 
 5. [ ] save the hash of the article into a database or just a file
 6. [ ] send them to telegram
@@ -11,6 +11,7 @@
 ### Categories 
 
 * Worldwide 
+* Breaking News
 * War 
 
 ### Sources
