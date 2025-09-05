@@ -36,10 +36,7 @@ for feed in FEED_PRIORITY_QUEUE:
     
         ranked_latest_news.append({"feed": feed, "since_latest_news": int(hours)})
 
-def return_since_latest_news(e):
-    return e["since_latest_news"]
-
-ranked_latest_news.sort(key=return_since_latest_news)
+ranked_latest_news.sort(key=lambda e: e["since_latest_news"])
 FEED = feedparser.parse(ranked_latest_news[0]["feed"])
 
 def get_news_rss() -> tuple[str, list]:
