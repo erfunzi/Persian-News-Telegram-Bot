@@ -1,4 +1,5 @@
 import feedparser
+import datetime
 import dotenv
 import os
 
@@ -12,23 +13,34 @@ REUTERS_RSS_FEED: str | None = os.getenv("reuters_rss_feed")
 
 FEED_PRIORITY_QUEUE: list[str | None] = [
     CNN_RSS_FEED,
-    BBC_RSS_FEED,
     ALJAZEERA_RSS_FEED,
-    REUTERS_RSS_FEED
+    REUTERS_RSS_FEED,
+    BBC_RSS_FEED
 ]
 
-# TODO: SWITCH SOURCES IF THE CURRENT ONE IS DOWN ( the "bozo" field would flip to 1 )/ HASN'T BEEN UPDATED
-# TODO: FIX SOME ISSUES WITH GETTING THE INFO FROM OTHER SOURCES ( more flexibility probably )
+ranked_latest_news = []
 
 for feed in FEED_PRIORITY_QUEUE:
     out = feedparser.parse(feed)
-    
-    if out["bozo"] == False:
-        FEED = out
-        break
 
     if out["bozo"]:
         pass
+
+    else:
+        last_news_article_date = list(out.entries[0].published_parsed)
+        last_news_article_date = datetime.datetime(*last_news_article_date[:6])
+        current_time = datetime.datetime.now()
+        time_difference = current_time - last_news_article_date
+
+        hours = time_difference.total_seconds() // 3600
+    
+        ranked_latest_news.append({"feed": feed, "since_latest_news": int(hours)})
+
+def return_since_latest_news(e):
+    return e["since_latest_news"]
+
+ranked_latest_news.sort(key=return_since_latest_news)
+FEED = feedparser.parse(ranked_latest_news[0]["feed"])
 
 def get_news_rss() -> tuple[str, list]:
     source: str = str(FEED.feed.title)
@@ -36,18 +48,23 @@ def get_news_rss() -> tuple[str, list]:
     news: list = []
 
     for entry in FEED.entries:
-        title = entry.title
-        summary = entry.summary
-        link = entry.link
-        published = entry.published
-        media_thumbnail = entry.media_thumbnail
+        try: title = entry.title
+        except AttributeError: title = None
+        try: summary = entry.summary
+        except AttributeError: summary = None
+        try: link = entry.link
+        except AttributeError: link = None
+        try: published = entry.published
+        except AttributeError: published = None
+        try: media_thumbnail = entry.media_thumbnail
+        except AttributeError: media_thumbnail = None
         
         news.append({
             "title":title,
             "summary":summary,
             "link":link,
             "published":published,
-            "media_thumbnail":media_thumbnail[0]
+            "media_thumbnail":media_thumbnail
         })
 
     return source, news
