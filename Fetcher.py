@@ -39,10 +39,9 @@ for feed in FEED_PRIORITY_QUEUE:
 ranked_latest_news.sort(key=lambda e: e["since_latest_news"])
 FEED = feedparser.parse(ranked_latest_news[0]["feed"])
 
-def get_news_rss() -> tuple[str, list]:
+def get_news_rss() -> tuple[str, list[dict]]:
     source: str = str(FEED.feed.title)
-    
-    news: list = []
+    news: list[dict] = []
 
     for entry in FEED.entries:
         try: title = entry.title
