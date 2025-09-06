@@ -12,10 +12,10 @@ ALJAZEERA_RSS_FEED: str | None = os.getenv("aljazeera_rss_feed")
 REUTERS_RSS_FEED: str | None = os.getenv("reuters_rss_feed")
 
 FEED_PRIORITY_QUEUE: list[str | None] = [
-    CNN_RSS_FEED,
+    BBC_RSS_FEED,
     ALJAZEERA_RSS_FEED,
     REUTERS_RSS_FEED,
-    BBC_RSS_FEED
+    CNN_RSS_FEED
 ]
 
 ranked_latest_news = []
@@ -65,6 +65,8 @@ def get_news_rss() -> tuple[str, list[dict]]:
 
     return source, news
 
-
-if __name__ == "__main__":
-    print(get_news_rss()[0])
+# FOR TESTING PURPOSES : 
+# if __name__ == "__main__":
+    # print(get_news_rss()[1])
+    # print(get_news_rss()[0])
+    # print(ranked_latest_news)
