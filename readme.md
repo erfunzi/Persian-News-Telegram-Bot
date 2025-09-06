@@ -1,7 +1,9 @@
 # Persian News Telegram Bot 
 
 ### Pipeline 
-1. [ ] Get the news using RSS / feedparser / other sources
+1. [ ] Get the news using RSS / feedparser / telegram
+ * - [x] RSS / feedparser
+ * - [ ] telegram 
 2. [ ] check if the hash of the article exists in the database/file  
 3. [ ] translate them into persian
 4. [ ] filter the news with the keywords using regex/nltk 
