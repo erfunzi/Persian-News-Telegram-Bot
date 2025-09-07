@@ -34,6 +34,7 @@ class DATABASE:
         self.CURSOR = self.CONN.cursor()
 
         self.CURSOR.execute("CREATE TABLE IF NOT EXISTS hashes (id SERIAL PRIMARY KEY, hash text)")
+        self.CONN.commit()
         print("TABLE CREATED SUCCESSFULLY")
     
     def add_to_db(self, hash: str) -> None:
